@@ -4,6 +4,8 @@ var app = angular.module('blog', []);
 +app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
     $scope.helloWorld = 'Aplicatii Web cu suport Java!';
   $scope.Profesor={};
+  $scope.evidenta={};
+  $scope.editEvidenta={};
   var url = "http://localhost:8080/persoana";
    $scope.persoane = [];
    $scope.keysPersoane = [];
@@ -11,8 +13,8 @@ var app = angular.module('blog', []);
 	$scope.obj={};
    $scope.person = {};
    $scope.editPerson = {};
- 
-   var url = "http://localhost:8080/Evidenta";
+ $scope.persoana={};
+   var urlEvidenta = "http://localhost:8080/Evidenta";
    $scope.grupa = [];
    $scope.keys = [];
 	$scope.obj={};
@@ -20,7 +22,7 @@ var app = angular.module('blog', []);
    $scope.editGroup = {};
  $scope.newKeys=[];
  
-    var url = "http://localhost:8080/Profesor";
+    var url2 = "http://localhost:8080/Profesor";
    $scope.Profesori= [];
    $scope.keysProfesori = [];
     $scope.obj={};
@@ -41,7 +43,7 @@ var app = angular.module('blog', []);
      function successCallback(response) {
 		$scope.obj=response;
         console.log(response.data);
-     $scope.persoane = $scope.obj.data;
+     $scope.evidente = $scope.obj.data;
      $scope.keys = Object.keys(response.data[0]);
      $scope.newKeys.push($scope.keys[4]);
      $scope.newKeys.push($scope.keys[0]);
@@ -62,8 +64,9 @@ var app = angular.module('blog', []);
             console.log(response);
             $scope.persoane.push(persoana);
             // done.
+
         }, function errorCallback(response) {
-            console.log(response);
+          
         });
     };
 
@@ -73,10 +76,10 @@ var app = angular.module('blog', []);
         console.log(Evidenta.id);
         $http({
             method: 'POST',
-            url: url,
+            url: urlEvidenta,
             data: Evidenta
         }).then(function successCallback(Evidenta) {
-            console.log(response);
+           
             $scope.grupa.push(Evidenta);
             // done.
         }, function errorCallback(response) {
@@ -103,26 +106,26 @@ var app = angular.module('blog', []);
 	 $scope.deleteEvidenta = function(id) {
         $http({
             method: 'DELETE',
-            url: url+'/' + id,
+            url: urlEvidenta+'/' + id,
             data: {}
         }).then(function successCallback(response) {
             // aici nu intra niciodata ca e functia de succes
         }, function errorCallback(response) {
             // aici intra pentru ca da eroare
-            $scope.grupa = $scope.grupa.filter(function(obj) {
+            $scope.evidente = $scope.evidente.filter(function(obj) {
                 return obj.id !== id;
             });
         });
     };
 
-
+$scope.editEvidenta={};
 
     $scope.setUpdatePerson = function(person) {
         $scope.editPerson = person;
     };
 	
-	 $scope.setUpdateGroup = function(group) {
-        $scope.editGroup = group;
+	 $scope.setUpdateEvidenta = function(evidenta) {
+        $scope.editEvidenta = evidenta;
     };
 
 
@@ -143,18 +146,18 @@ var app = angular.module('blog', []);
     };
 	
 
-    $scope.updateGroup = function() {
+    $scope.updateEvidenta = function() {
         $http({
             method: 'PUT',
-            url: url,
-            data: $scope.editGroup
+            url: urlEvidenta,
+            data: $scope.editEvidenta
         }).then(function successCallback(response) {
-            $scope.editGroup = {};
+            $scope.editEvidenta = {};
             console.log(response);
             // $scope.persoane.push($scope.editPerson);
             // done.
         }, function errorCallback(response) {
-            $scope.editGroup = {};
+            $scope.editEvidenta = {};
             console.log(response);
         });
     };
@@ -172,7 +175,7 @@ var app = angular.module('blog', []);
    });
     $scope.profesor={};
            $scope.addProfesor = function(profesor) {
-            $scope.profi.data.push(profesor);
+            $scope.profi.push(profesor);
             console.log("proful de adaugat:",profesor);
         profesor.id = parseInt(profesor.id);
         console.log(profesor.id);
@@ -181,10 +184,12 @@ var app = angular.module('blog', []);
             url: urlProf,
             data: profesor
         }).then(function successCallback(response) {
+            profesor={};
             console.log(response);
             $scope.profi.push(profesor);
             // done.
         }, function errorCallback(response) {
+            profesor={};
             console.log(response);
         });
     };
@@ -210,7 +215,7 @@ var app = angular.module('blog', []);
     };
     
    
-    $scope.addEvidenta = function(Evidenta) {
+   /* $scope.addEvidenta = function(Evidenta) {
         Evidenta.id = parseInt(Evidenta.id);
         console.log(Evidenta.id);
         $http({
@@ -224,7 +229,7 @@ var app = angular.module('blog', []);
         }, function errorCallback(response) {
             console.log(response);
         });
-    };
+    };*/
 
      $scope.deleteProfesor = function(id) {
         $http({
@@ -251,7 +256,7 @@ var app = angular.module('blog', []);
 
        }*/
        //logica pentru laborant
-       var urlLab = "http://localhost:8080/Laborant";
+       var urlLab = "http://localhost:8080/laborant";
    $scope.laboranti = {};
    $scope.keysLaborant = [];
     $scope.obj={};
@@ -290,7 +295,7 @@ $scope.editLaborant={};
         $scope.updateLaborant = function() {
         $http({
             method: 'PUT',
-            url: url,
+            url: urlLab,
             data: $scope.editLaborant
         }).then(function successCallback(response) {
             $scope.editLaborant = {};
