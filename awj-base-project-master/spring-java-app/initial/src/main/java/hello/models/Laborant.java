@@ -3,14 +3,14 @@ package hello;
 import java.util.List;
 import java.util.ArrayList;
 
-public class  {
+public class Laborant {
   private String name;
   private int id;
-  private int materie;
+  private String materie;
   private int nrGrupe;
   public Laborant() {}
 
-  public Laborant(int id, String name, String materie , int nrGrupe, ) {
+  public Laborant(int id, String name, String materie , int nrGrupe ) {
       this.name = name;
       this.id = id;
       this.materie=materie;
@@ -25,7 +25,7 @@ public class  {
       return this.materie;
       
   }
-  public String getnrGrupe() {
+  public int getnrGrupe() {
       return this.nrGrupe;
   }
 

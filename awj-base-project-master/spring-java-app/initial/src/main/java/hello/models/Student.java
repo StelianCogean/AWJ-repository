@@ -32,6 +32,12 @@ public class Student {
   public void setName(String name){
       this.name=name;
   }
+  public void setGrupa(String grupa){
+      this.grupa=grupa;
+  }
+  public void setMedie(float medie){
+      this.medie=medie;
+  }
 
 
 

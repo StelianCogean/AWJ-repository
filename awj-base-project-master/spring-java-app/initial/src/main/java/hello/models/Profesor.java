@@ -25,7 +25,7 @@ public class Profesor {
       return this.varsta;
       
   }
-  public String getnrGrupe() {
+  public int getnrGrupe() {
       return this.nrGrupe;
   }
 

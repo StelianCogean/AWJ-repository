@@ -14,25 +14,26 @@ import java.util.ArrayList;
 
 @RestController
 public class ProfesorController {
-  private List<Profesor> profesori = new ArrayList<Profesor>();
-ProfesorController() {
-    Profesor p1 = new Profesor(1, "John", 83, 6);
-    Profesor p2 = new Profesor(2, "Paul",71, 5);
-    Profesor p3 = new Profesor(3, "Kevin", 61, 8);
+  private List<Profesor> Profesori = new ArrayList<Profesor>();
 
-    profesori.add(p1);
-    profesori.add(p2);
-    profesori.add(p3);
+  ProfesorController() {
+    Profesor p1 = new Profesor(1, "John",23,5);
+    Profesor p2 = new Profesor(2, "Paul",44,2);
+    Profesor p3 = new Profesor(3, "Paula",100,1);
+
+    Profesori.add(p1);
+    Profesori.add(p2);
+    Profesori.add(p3);
   }
 
   @RequestMapping(value="/Profesor", method = RequestMethod.GET)
   public List<Profesor> index() {
-    return this.profesori;
+    return this.Profesori;
   }
 
   @RequestMapping(value="/Profesor/{id}", method = RequestMethod.GET)
   public ResponseEntity show(@PathVariable("id") int id) {
-    for(Profesor p : this.profesori) {
+    for(Profesor p : this.Profesori) {
       if(p.getId() == id) {
         return new ResponseEntity<Profesor>(p, new HttpHeaders(), HttpStatus.OK);
       }
@@ -42,29 +43,12 @@ ProfesorController() {
 
   @RequestMapping(value="/Profesor/{id}", method = RequestMethod.DELETE)
   public ResponseEntity remove(@PathVariable("id") int id) {
-    for(Profesor p : this.profesori) {
+    for(Profesor p : this.Profesori) {
       if(p.getId() == id) {
-        this.profesori.remove(p);
+        this.Profesori.remove(p);
         return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NO_CONTENT);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
-
-@RequestMapping(value="/Profesor/{id}", method = RequestMethod.GET)
-  public ResponseEntity show(@PathVariable("id") int id) {
-    int j=0;
-    for(Profesor p : this.profesori) {
-      if(p.getId() == id) {
-       j++
-      }
-    }
-   
-      Profesor p= new profesori(i+1,name,varsta,nrGrupe;
-        profesori.add(p);
-        return this.profesori;
-
-  }
-
-
 }
